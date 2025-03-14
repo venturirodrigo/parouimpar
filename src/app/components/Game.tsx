@@ -221,9 +221,9 @@ export default function Game() {
   if (gameState === 'finished' && result && socket?.id) {
     const isWinner = result.winner === socket.id;
     return isWinner ? (
-      <WinnerScreen socketId={socket.id} />
+      <WinnerScreen onPlayAgain={() => setGameState('waiting')} onLogout={handleLogout} />
     ) : (
-      <LoserScreen socketId={socket.id} />
+      <LoserScreen onPlayAgain={() => setGameState('waiting')} onLogout={handleLogout} />
     );
   }
 
