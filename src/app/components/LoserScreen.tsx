@@ -1,8 +1,9 @@
 interface LoserScreenProps {
-  socketId: string;
+  onPlayAgain: () => void;
+  onLogout: () => void;
 }
 
-export default function LoserScreen({ socketId }: LoserScreenProps) {
+export default function LoserScreen({ onPlayAgain, onLogout }: LoserScreenProps) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full text-white border border-gray-700">
@@ -11,10 +12,16 @@ export default function LoserScreen({ socketId }: LoserScreenProps) {
             <h2 className="text-4xl font-bold text-red-400 mb-4">Você Perdeu...</h2>
           </div>
           <button
-            onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition text-lg font-bold"
+            onClick={onPlayAgain}
+            className="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition text-lg font-bold"
           >
             Tentar Novamente
+          </button>
+          <button
+            onClick={onLogout}
+            className="bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition text-lg font-bold mt-4"
+          >
+            Sair
           </button>
         </div>
       </div>

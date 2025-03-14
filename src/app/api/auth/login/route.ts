@@ -22,12 +22,12 @@ export async function POST(request: Request) {
     }
 
     // Find user
-    const result = await pool.query(
-      'SELECT * FROM users WHERE email = $1',
-      [email]
+    const { rows } = await pool.query(
+      'SELECT id, name, email, avatar FROM users WHERE email = $1 AND password = $2',
+      [email, password]
     );
 
-    const user = result.rows[0];
+    const user = rows[0];
 
     if (!user) {
       return NextResponse.json(
@@ -47,7 +47,8 @@ export async function POST(request: Request) {
     }
 
     // Return user without password
-    const { password: _, ...userWithoutPassword } = user;
+    const { id, name, email: userEmail, avatar } = user;
+    const userWithoutPassword = { id, name, email: userEmail, avatar };
 
     return NextResponse.json({ user: userWithoutPassword });
   } catch (error) {

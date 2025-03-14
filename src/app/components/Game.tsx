@@ -5,6 +5,7 @@ import io, { Socket } from 'socket.io-client';
 import WinnerScreen from './WinnerScreen';
 import LoserScreen from './LoserScreen';
 import Auth from './Auth';
+import Image from 'next/image';
 
 let socket: Socket | null = null;
 
@@ -231,10 +232,12 @@ export default function Game() {
       <div className="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full text-white border border-gray-700">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center space-x-3">
-            <img
+            <Image
               src={user.avatar}
               alt={user.name}
-              className="w-10 h-10 rounded-full"
+              width={48}
+              height={48}
+              className="w-12 h-12 rounded-full"
             />
             <span className="text-gray-300">{user.name}</span>
           </div>
